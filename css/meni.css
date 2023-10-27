@@ -1,0 +1,18 @@
+#menu{
+    list-style: none;
+
+}
+
+#menu li{
+    display: inline;
+    padding: 2%;
+    color: #0000EE;
+}
+
+#menu li a{
+    text-decoration: none;
+}
+
+#menu li :hover{
+    color: #ff9900;
+}
