@@ -1,0 +1,32 @@
+body{
+    background-color: #fdf1d3;
+}
+#stan, #kuca, #pp {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,300px);
+    grid-gap: 20px;
+}
+#stan img, #kuca img, #pp img{
+    width:100%;
+}
+#stan div{
+    background-color: white;
+}
+#kuca div{
+    background-color: powderblue;
+}
+#pp div{
+    background-color: green;
+}
+.naziv_nekretnine{
+    text-align: left;
+}
+.kvadratura{
+    text-align: left;
+}
+.cijena{
+    text-align: right;
+}
+.dugme_container{
+    text-align: center;
+}
