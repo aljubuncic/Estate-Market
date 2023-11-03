@@ -1,0 +1,19 @@
+body{
+    background-color: #fdf1d3;
+}
+
+#tabela_podaci_korisnika{
+    border-spacing: 20px;
+}
+
+#slika_korisnika{
+    width: 120px;
+}
+
+.input_field{
+    border-style:outset;
+    border-color: #EEE3C8;
+    height: 30px;
+}
+
+
