@@ -1,0 +1,17 @@
+body{
+    background-color: #fdf1d3;
+}
+#detalji_tabela td{
+    padding: 2%;
+}
+#upiti{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+#upiti div{
+    border: solid black 1px;
+    background-color: white;
+    padding: 1%;
+    margin: 1%;
+}
