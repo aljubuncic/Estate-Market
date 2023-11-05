@@ -1,0 +1,9 @@
+body{
+    background-color: #fdf1d3;
+    margin-top: 50px;
+}
+#meni{
+    top: 0;
+    position: fixed;
+    height: 50px;
+}
