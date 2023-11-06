@@ -1,18 +1,18 @@
-#stan, #kuca, #pp {
+#stanovi, #kuce, #pprostori {
     display: grid;
     grid-template-columns: repeat(auto-fit,300px);
     grid-gap: 20px;
 }
-#stan img, #kuca img, #pp img{
+#stanovi img, #kuce img, #pprostori img{
     width:100%;
 }
-#stan div{
+#stanovi div{
     background-color: white;
 }
-#kuca div{
+#kuce div{
     background-color: powderblue;
 }
-#pp div{
+#pprostori div{
     background-color: green;
 }
 .naziv_nekretnine{
