@@ -26,4 +26,4 @@ how to set a table witdh to be as a block element
 
 how do i display items in a grid so it has a variable amount of columns depending on the screen size
 
-how do i make that clicking on a link inside the menu which is inside the iframe to redirect me to a another page but it loads it in the same tab, and it does not load the page in the iframe section
+how do i make that clicking on a link inside the menu which is inside the iframe to redirect me to a another page, opens it in a same tab and it does not open it in the iframe part
