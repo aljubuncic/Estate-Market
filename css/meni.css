@@ -10,7 +10,8 @@ html{
 
 #menu li{
     display: inline;
-    padding: 2%;
+    padding-left: 2%;
+    padding-right: 2%;
     color: #0000EE;
 }
 
