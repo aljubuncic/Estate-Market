@@ -6,4 +6,6 @@ body{
     top: 0;
     position: fixed;
     height: 50px;
+    border: 0px;
+    width: 100%;
 }
