@@ -5,3 +5,5 @@ CSS validacija: https://jigsaw.w3.org/css-validator/#validate_by_upload
 HTML greške prije validacije: 26
 
 CSS greške prije validacije: 0
+
+Na novim verzijama profil.html i profil.css datoteka nije bilo errora.
