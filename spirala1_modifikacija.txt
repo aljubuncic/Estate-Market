@@ -1,0 +1,10 @@
+Izbrisao sam tabelu i formirao grid.
+Slika, svaki label i svaki input su zasebno činili jedan div.
+Kao default stanje sam posmatrao slučaj kada je
+širina ekrana manja od 500px. 
+Postavio sam da grid ima 3 kolone.
+Elemente grida sam stavio na odgovarajuće pozicije
+preko grid-column i grid-row propertya.
+Koristio sam media query kada je širina ekrana >= 500px
+gdje sam postavljao poziciju elemenata preko grid-column 
+te slike koja se protezala na dva reda  - grid-row-start: 1; grid-row-end: 3.

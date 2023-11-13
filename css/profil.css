@@ -1,7 +1,26 @@
 #tabela_podaci_korisnika{
-    border-spacing: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    width:fit-content;
+    gap:20px;
 }
 
+#div_slika_korisnika{
+    grid-column: 1;
+    text-align: center;
+}
+#div_ime_label, #div_prezime_label, #div_username_label, #div_password_label{
+    grid-column: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#div_ime_input, #div_prezime_input, #div_username_input, #div_password_input{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
 #slika_korisnika{
     width: 120px;
 }
@@ -12,4 +31,16 @@
     height: 30px;
 }
 
-
+@media (min-width: 500px) {
+    #tabela_podaci_korisnika{
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+    }
+    #div_slika_korisnika{
+        grid-column: 1;
+        grid-row-start: 1;
+        grid-row-end: 3;
+    }
+    #div_ime_label, #div_prezime_label, #div_username_label, #div_password_label{
+        grid-column: 2;
+    }
+}
