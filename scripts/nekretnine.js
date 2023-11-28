@@ -2,9 +2,12 @@ function spojiNekretnine(divReferenca, instancaModula, tip_nekretnine) {
     // pozivanje metode za filtriranje
     let listaNekretnina = instancaModula.filtrirajNekretnine({ tip_nekretnine: tip_nekretnine });
     // iscrtavanje elemenata u divReferenca element
+    if(!divReferenca)
+            return;
     for(let nekretnina of listaNekretnina){
         
         let nekretninaKartica = document.createElement('div');
+        
         divReferenca.appendChild(nekretninaKartica);
 
         let slika = document.createElement('img');
@@ -92,13 +95,13 @@ let listaNekretnina = [{
 {
     id: 3,
     tip_nekretnine: "Stan",
-    naziv: "Useljiv stan Sarajevo",
-    kvadratura: 58,
-    cijena: 232000,
+    naziv: "Stan Dobrinja Novogradnja",
+    kvadratura: 54,
+    cijena: 149792,
     tip_grijanja: "plin",
-    lokacija: "Novo Sarajevo",
-    godina_izgradnje: 2019,
-    datum_objave: "01.10.2023.",
+    lokacija: "Dobrinja",
+    godina_izgradnje: 2022,
+    datum_objave: "28.11.2023.",
     opis: "Sociis natoque penatibus.",
     upiti: [{
         korisnik_id: 1,
@@ -112,13 +115,13 @@ let listaNekretnina = [{
 {
     id: 4,
     tip_nekretnine: "Stan",
-    naziv: "Useljiv stan Sarajevo",
-    kvadratura: 58,
-    cijena: 232000,
+    naziv: "Stan Sarajevo - Centar Poljine",
+    kvadratura: 62,
+    cijena: 250000,
     tip_grijanja: "plin",
-    lokacija: "Novo Sarajevo",
-    godina_izgradnje: 2019,
-    datum_objave: "01.10.2023.",
+    lokacija: "Centar",
+    godina_izgradnje: 2022,
+    datum_objave: "27.03.2023.",
     opis: "Sociis natoque penatibus.",
     upiti: [{
         korisnik_id: 1,
@@ -136,7 +139,7 @@ let listaNekretnina = [{
     kvadratura: 70,
     cijena: 330000,
     tip_grijanja: "plin",
-    lokacija: "Vlakovo",
+    lokacija: "Ilidža",
     godina_izgradnje: 2020,
     datum_objave: "01.10.2023.",
     opis: "Sociis natoque penatibus.",
@@ -152,13 +155,13 @@ let listaNekretnina = [{
 {
     id: 6,
     tip_nekretnine: "Kuća",
-    naziv: "Kuća na Vlakovu",
-    kvadratura: 70,
-    cijena: 330000,
+    naziv: "Kuća Bosanski Brod",
+    kvadratura: 80,
+    cijena: 110000,
     tip_grijanja: "plin",
-    lokacija: "Vlakovo",
-    godina_izgradnje: 2020,
-    datum_objave: "01.10.2023.",
+    lokacija: "Bosanski Brod",
+    godina_izgradnje: 2017,
+    datum_objave: "13.08.2023.",
     opis: "Sociis natoque penatibus.",
     upiti: [{
         korisnik_id: 1,
@@ -172,11 +175,11 @@ let listaNekretnina = [{
 {
     id: 7,
     tip_nekretnine: "Kuća",
-    naziv: "Kuća na Vlakovu",
-    kvadratura: 70,
-    cijena: 330000,
+    naziv: "Kuća Sarajevo - Centar",
+    kvadratura: 110,
+    cijena: 220000,
     tip_grijanja: "plin",
-    lokacija: "Vlakovo",
+    lokacija: "Centar",
     godina_izgradnje: 2020,
     datum_objave: "01.10.2023.",
     opis: "Sociis natoque penatibus.",
@@ -192,11 +195,11 @@ let listaNekretnina = [{
 {
     id: 8,
     tip_nekretnine: "Poslovni prostor",
-    naziv: "Mali poslovni prostor",
-    kvadratura: 20,
-    cijena: 70000,
+    naziv: "Poslovni prostor Gradačac",
+    kvadratura: 130,
+    cijena: 100000,
     tip_grijanja: "struja",
-    lokacija: "Centar",
+    lokacija: "Gradačac",
     godina_izgradnje: 2005,
     datum_objave: "20.08.2023.",
     opis: "Magnis dis parturient montes.",
@@ -209,12 +212,12 @@ let listaNekretnina = [{
 {
     id: 9,
     tip_nekretnine: "Poslovni prostor",
-    naziv: "Mali poslovni prostor",
-    kvadratura: 20,
-    cijena: 70000,
+    naziv: "Poslovni prostor Pofalići",
+    kvadratura: 79,
+    cijena: 158000,
     tip_grijanja: "struja",
-    lokacija: "Centar",
-    godina_izgradnje: 2005,
+    lokacija: "Novo Sarajevo",
+    godina_izgradnje: 2003,
     datum_objave: "20.08.2023.",
     opis: "Magnis dis parturient montes.",
     upiti: [{
