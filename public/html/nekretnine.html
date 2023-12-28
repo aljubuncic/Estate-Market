@@ -11,6 +11,21 @@
     <body>
         <iframe src="meni.html" id="meni"></iframe>
 
+        <p>
+            Cijena od
+            <input type="number" step="0.01" placeholder="Minimalna cijena" id="min_cijena">
+            do
+            <input type="number" step="0.01" placeholder="Maksimalna cijena" id="max_cijena">
+        </p>
+        
+        <p>
+            Kvadratura od
+            <input type="number" step="0.01" placeholder="Minimalna kvadratura" id="min_kvadratura">
+            do
+            <input type="number" step="0.01" placeholder="Maksimalna kvadratura" id="max_kvadratura">
+        </p>
+        <input type="button" value="Filtriraj" id="filtriraj_dugme">
+
         <h3>Stan</h3>
         <div id="stan">
         </div>
@@ -24,6 +39,7 @@
         </div>
         
     </body>
+    <script src="../scripts/poziviAjax.js"></script>
     <script src="../scripts/SpisakNekretnina.js"></script>
     <script src="../scripts/nekretnine.js"></script>
 </html>
