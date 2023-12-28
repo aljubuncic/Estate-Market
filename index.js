@@ -228,13 +228,38 @@ app.post('/marketing/nekretnina/:id',function(req,res,next){
     })
 });
 
+var prethodniPozivNekretnine = [];
+
 app.post('/marketing/osvjezi',async function(req,res,next){
+    res.setHeader('Content-Type','application/json');
     try{
-        res.setHeader('Content-Type','application/json');
+        let nekretnineIds = [];
+        if(req.body.nizNekretnina){
+            nekretnineIds = req.body.nizNekretnina;
+            req.session.nekretnineIds = nekretnineIds;
+        }
+        else
+            nekretnineIds = req.session.nekretnineIds;
         let data = await fs.promises.readFile(__dirname + '/data/klikovipretrage.json','utf8');
         klikovipretrage = JSON.parse(data);
-        res.status(200).json(klikovipretrage);
-    }
+        klikovipretrage = klikovipretrage.filter(x => nekretnineIds.find(y => y == x.id));
+        //filtirianje na osnovu da li se promjenio broj klikova i pretraga za pojedine nekretnine u odnosu na prethodni poziv 
+        result = klikovipretrage.filter(function(element){
+            prethodniPozivNekretnina = prethodniPozivNekretnine.find(x => x.id == element.id);
+            if(!prethodniPozivNekretnina) // ako je neka nova nekeretnina koje nije bilo u proslom pozivu
+                return true;
+            //provjera da li su se vrijednosti klikova i pretraga promjenile
+            if(prethodniPozivNekretnina.pretrage != element.pretrage || prethodniPozivNekretnina.klikovi != element.klikovi)
+                return true;
+            else
+                return false;
+        });
+
+        prethodniPozivNekretnine = klikovipretrage;
+            res.status(200).json({
+                nizNekretnina: result
+            });
+        }
     catch(ex){
         throw ex;
     }
