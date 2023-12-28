@@ -35,6 +35,18 @@ function spojiNekretnine(divReferenca, instancaModula, tip_nekretnine) {
         kvadratura.classList.add('kvadratura');
         nekretninaKartica.appendChild(kvadratura);
         
+        let pretrage = document.createElement('div');
+        pretrage.setAttribute('id',`pretrage-${nekretnina.id}`);
+        pretrage.appendChild(document.createTextNode());
+        pretrage.classList.add('kvadratura');
+        nekretninaKartica.appendChild(pretrage);
+        
+        let klikovi = document.createElement('div');
+        klikovi.setAttribute('id',`klikovi-${nekretnina.id}`);
+        klikovi.appendChild(document.createTextNode());
+        klikovi.classList.add('kvadratura');
+        nekretninaKartica.appendChild(klikovi);
+        
         let cijena = document.createElement('p');
         cijena.appendChild(document.createTextNode(nekretnina.cijena + " KM"));
         cijena.classList.add('cijena');
