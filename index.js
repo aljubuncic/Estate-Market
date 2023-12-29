@@ -52,7 +52,7 @@ app.get('/profil.html',function(req,res,next){
     });
 });
 
-app.post('/login', async function(req,res,next){
+app.post('/login', function(req,res,next){
     res.setHeader('Content-Type','application/json');
     let requestBody = req.body;
     fs.readFile(__dirname + '/data/korisnici.json','utf8',async function(err,data){
@@ -228,8 +228,6 @@ app.post('/marketing/nekretnina/:id',function(req,res,next){
     })
 });
 
-var prethodniPozivNekretnine = [];
-
 app.post('/marketing/osvjezi',async function(req,res,next){
     res.setHeader('Content-Type','application/json');
     try{
@@ -238,14 +236,17 @@ app.post('/marketing/osvjezi',async function(req,res,next){
             nekretnineIds = req.body.nizNekretnina;
             req.session.nekretnineIds = nekretnineIds;
         }
-        else
+        else{
             nekretnineIds = req.session.nekretnineIds;
+        }
         let data = await fs.promises.readFile(__dirname + '/data/klikovipretrage.json','utf8');
         klikovipretrage = JSON.parse(data);
         klikovipretrage = klikovipretrage.filter(x => nekretnineIds.find(y => y == x.id));
         //filtirianje na osnovu da li se promjenio broj klikova i pretraga za pojedine nekretnine u odnosu na prethodni poziv 
         result = klikovipretrage.filter(function(element){
-            prethodniPozivNekretnina = prethodniPozivNekretnine.find(x => x.id == element.id);
+            let prethodniPozivNekretnina = null;
+            if(req.session.prethodniPozivNekretnine) // provjera da li je bilo poziva od prije
+                prethodniPozivNekretnina = req.session.prethodniPozivNekretnine.find(x => x.id == element.id);
             if(!prethodniPozivNekretnina) // ako je neka nova nekeretnina koje nije bilo u proslom pozivu
                 return true;
             //provjera da li su se vrijednosti klikova i pretraga promjenile
@@ -255,7 +256,7 @@ app.post('/marketing/osvjezi',async function(req,res,next){
                 return false;
         });
 
-        prethodniPozivNekretnine = klikovipretrage;
+        req.session.prethodniPozivNekretnine = klikovipretrage;
             res.status(200).json({
                 nizNekretnina: result
             });
@@ -269,7 +270,6 @@ app.post('/marketing/osvjezi',async function(req,res,next){
 app.listen(port);
 
 
-// vidjeti smije li biti u index.js
 async function updateEntityInJsonFile(entities, entity, JSONFile, res, responseMessage){
     entities = entities.filter(e => e.id!=entity.id);
     entities.push(entity);
