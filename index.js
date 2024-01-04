@@ -227,19 +227,14 @@ app.post('/marketing/osvjezi', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
 
     let nekretnineIds = [];
-    console.log('--------------------------');
-    console.log('Request body: ', req.body);
+    
     if (req.body.nizNekretnina) {
         nekretnineIds = req.body.nizNekretnina;
         req.session.nekretnineIds = nekretnineIds;
-        console.log('req.session.nekretnineIds: (kada je req.body neprazan) ',req.session.nekretnineIds)
     }
     else {
         nekretnineIds = req.session.nekretnineIds;
     }
-    console.log('req.session.nekretnineIds: ', req.session.nekretnineIds);
-    console.log('Trenutne NekretnineIds: ', nekretnineIds);
-    console.log('Prethodni odgovor nekretnine: ', req.session.prethodniOdgovorNekretnine);
     
     fs.readFile(__dirname + '/data/klikovipretrage.json', 'utf8', function (error, data) {
         if(error)
@@ -270,7 +265,6 @@ app.post('/marketing/osvjezi', function (req, res, next) {
         });
 
         req.session.prethodniOdgovorNekretnine = klikovipretrage;
-        console.log('Vraceni podaci: ', klikovipretrageSaPromjenom);
         res.status(200).json({
             nizNekretnina: klikovipretrageSaPromjenom
         });
