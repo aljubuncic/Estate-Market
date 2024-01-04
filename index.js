@@ -149,6 +149,8 @@ app.put('/korisnik', function (req, res, next) {
                 for (let key in requestBody) {
                     if (key != 'password')
                         user[key] = requestBody[key];
+                    if(key == 'username')
+                        req.session.username = requestBody[key];
                 }
                 await updateEntityInJsonFile(users, user, 'korisnici', res, 'Podaci su uspješno ažurirani');
             });
@@ -156,6 +158,8 @@ app.put('/korisnik', function (req, res, next) {
         else {
             for (let key in requestBody) {
                 user[key] = requestBody[key];
+                if(key == 'username')
+                    req.session.username = requestBody[key];
             }
             await updateEntityInJsonFile(users, user, 'korisnici', res, 'Podaci su uspješno ažurirani');
         }
