@@ -1,18 +1,55 @@
-function spojiNekretnine(divReferenca, instancaModula, tip_nekretnine) {
+const divNekretnine = document.getElementById('nekretnine');
+
+const spisakSvihNekretnina = SpisakNekretnina();
+
+document.getElementById('filtriraj_dugme').addEventListener('click',filtrirajNekretnine);
+
+document.body.addEventListener('click', function(event) {
+    if (event.target.classList.contains('dugme_detalji')) {
+        klikNekretnina(event);
+    }
+});
+
+PoziviAjax.getNekretnine(function(error,data){
+    if(error)
+        throw error;
+    spisakSvihNekretnina.init(data, null);
+    filtrirajNekretnine();
+    MarketingAjax.osvjeziPretrage(divNekretnine);
+});
+
+
+function spojiNekretnine(divReferenca, instancaModula) {
+    const divStan = divReferenca.querySelector("#stan");
+    const divKuca = divReferenca.querySelector("#kuca");
+    const divPp = divReferenca.querySelector("#pp");
     // pozivanje metode za filtriranje
-    let listaNekretnina = instancaModula.filtrirajNekretnine({ tip_nekretnine: tip_nekretnine });
+    let listaNekretnina = instancaModula.filtrirajNekretnine({});
     // iscrtavanje elemenata u divReferenca element
     if(!divReferenca)
             return;
     //brisanje postojećih kartica nekretnina
-    while(divReferenca.firstChild){
-        divReferenca.removeChild(divReferenca.firstChild);
+    while(divStan.firstChild){
+        divStan.removeChild(divStan.firstChild);
+    }
+    while(divKuca.firstChild){
+        divKuca.removeChild(divKuca.firstChild);
+    }
+    while(divPp.firstChild){
+        divPp.removeChild(divPp.firstChild);
     }
     for(let nekretnina of listaNekretnina){
         
         let nekretninaKartica = document.createElement('div');
-        
-        divReferenca.appendChild(nekretninaKartica);
+        nekretninaKartica.setAttribute('id',nekretnina.id);
+        nekretninaKartica.classList.add('kartica');
+
+        if(nekretnina.tip_nekretnine == 'Stan')
+            divStan.appendChild(nekretninaKartica);
+        else if(nekretnina.tip_nekretnine == 'Kuća')
+            divKuca.appendChild(nekretninaKartica);
+        else if(nekretnina.tip_nekretnine == 'Poslovni prostor')
+            divPp.appendChild(nekretninaKartica);
 
         let slika = document.createElement('img');
         if(nekretnina.tip_nekretnine == "Stan"){
@@ -38,19 +75,19 @@ function spojiNekretnine(divReferenca, instancaModula, tip_nekretnine) {
         kvadratura.appendChild(document.createTextNode(nekretnina.kvadratura + " m^2"));
         kvadratura.classList.add('kvadratura');
         nekretninaKartica.appendChild(kvadratura);
-        /*
+        
         let pretrage = document.createElement('div');
         pretrage.setAttribute('id',`pretrage-${nekretnina.id}`);
-        pretrage.appendChild(document.createTextNode());
+        pretrage.appendChild(document.createTextNode('Pretrage: '));
         pretrage.classList.add('kvadratura');
         nekretninaKartica.appendChild(pretrage);
         
         let klikovi = document.createElement('div');
         klikovi.setAttribute('id',`klikovi-${nekretnina.id}`);
-        klikovi.appendChild(document.createTextNode());
+        klikovi.appendChild(document.createTextNode('Klikovi: '));
         klikovi.classList.add('kvadratura');
         nekretninaKartica.appendChild(klikovi);
-        */
+
         let cijena = document.createElement('p');
         cijena.appendChild(document.createTextNode(nekretnina.cijena + " KM"));
         cijena.classList.add('cijena');
@@ -61,30 +98,13 @@ function spojiNekretnine(divReferenca, instancaModula, tip_nekretnine) {
         let dugme_detalji = document.createElement('input');
         dugme_detalji.setAttribute("type","button");
         dugme_detalji.setAttribute("value","Detalji");
+        dugme_detalji.setAttribute("id",nekretnina.id);
         dugme_detalji.classList.add('dugme_detalji');
         dugme_container.appendChild(dugme_detalji);
         nekretninaKartica.appendChild(dugme_container);
     }
 }
 
-const divStan = document.getElementById("stan");
-const divKuca = document.getElementById("kuca");
-const divPp = document.getElementById("pp");
-
-let nekretnine = [];
-const spisakSvihNekretnina = SpisakNekretnina();
-
-document.getElementById('filtriraj_dugme').addEventListener('click',filtrirajNekretnine);
-
-PoziviAjax.getNekretnine(obradiNekretnine);
-
-function obradiNekretnine(error,data){
-    if(error)
-        throw error;
-    nekretnine = data;
-    spisakSvihNekretnina.init(nekretnine, null);
-    prikaziNekretnine(spisakSvihNekretnina);
-}
 
 function filtrirajNekretnine(){
     min_cijena = document.getElementById('min_cijena').value;
@@ -92,19 +112,22 @@ function filtrirajNekretnine(){
     min_kvadratura = document.getElementById('min_kvadratura').value;
     max_kvadratura = document.getElementById('max_kvadratura').value;
     kriterij = {
-        ...(min_cijena!='') && {min_cijena: min_cijena},
-        ...(max_cijena!='') && {max_cijena: max_cijena},
-        ...(min_kvadratura!='') && {min_kvadratura: min_kvadratura},
-        ...(max_kvadratura!='') && {max_kvadratura: max_kvadratura}
+        ...(min_cijena!='') && {min_cijena: parseFloat(min_cijena)},
+        ...(max_cijena!='') && {max_cijena: parseFloat(max_cijena)},
+        ...(min_kvadratura!='') && {min_kvadratura: parseFloat(min_kvadratura)},
+        ...(max_kvadratura!='') && {max_kvadratura: parseFloat(max_kvadratura)}
     };
     filtriraneNekretnine = spisakSvihNekretnina.filtrirajNekretnine(kriterij);
     let spisakFiltriranihNekretnina = SpisakNekretnina();
-    spisakFiltriranihNekretnina.init(filtriraneNekretnine);
-    prikaziNekretnine(spisakFiltriranihNekretnina);
+    spisakFiltriranihNekretnina.init(filtriraneNekretnine,null);
+    MarketingAjax.novoFiltriranje(filtriraneNekretnine);
+    spojiNekretnine(divNekretnine, spisakFiltriranihNekretnina);
 }
 
-function prikaziNekretnine(spisakNekretnina){
-    spojiNekretnine(divStan, spisakNekretnina, "Stan");
-    spojiNekretnine(divKuca, spisakNekretnina, "Kuća");
-    spojiNekretnine(divPp, spisakNekretnina, "Poslovni prostor");
+function klikNekretnina(event){
+    let nekretninaKartica = event.target.parentNode.parentNode;
+    nekretninaKartica.classList.toggle('expanded');
+    let idNekretnine = event.target.id;
+    MarketingAjax.klikNekretnina(parseInt(idNekretnine));
 }
+
