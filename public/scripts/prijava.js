@@ -19,7 +19,7 @@ function updateMenu(error,data){
         data: data,
         error: error
     },'http://localhost:3000/meni.html');
-    window.location.replace("http://localhost:3000/nekretnine.html");
+    window.location.replace("http://localhost:3000/profil.html");
 }
 
 function displayErrorMessage(){
