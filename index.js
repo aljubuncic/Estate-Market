@@ -4,6 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const bcrypt = require('bcrypt');
+const pripremaBaze = require(__dirname+'/config/priprema.js')();
 const app = express();
 
 const port = 3000;
