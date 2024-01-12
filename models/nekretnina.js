@@ -33,10 +33,18 @@ module.exports = function(sequelize){
             allowNull: false
         },
         datum_objave: {
-            type: Sequelize.DATE,
+            type: Sequelize.STRING,
             allowNull: false
         },
-        opis: Sequelize.STRING
+        opis: Sequelize.STRING,
+        klikovi: {
+            type: Sequelize.INTEGER,
+            allowNull: false
+        },
+        pretrage: {
+            type: Sequelize.INTEGER,
+            allowNull: false
+        }
     },
     {
         freezeTableName: true
