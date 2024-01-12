@@ -1,1 +1,14 @@
-[{"id":1,"ime":"ahmed","prezime":"ljubuncic","username":"username2","password":"$2b$10$EOQN0GdOFxIzuBvEm8U8B.lVlitYgKClh6kWDpy1dfqV/86d4h7PW"},{"id":2,"ime":"Neko2","prezime":"Nekic2","username":"a","password":"$2b$10$zWwBXjQ.IvEGXkez6TMm3./rQ1SPkO33oo9e8/zLXHwPOPbBexueq"}]
+[
+    {
+        "ime": "ahmed",
+        "prezime": "ljubuncic",
+        "username": "username2",
+        "password": "$2b$10$EOQN0GdOFxIzuBvEm8U8B.lVlitYgKClh6kWDpy1dfqV/86d4h7PW"
+    },
+    {
+        "ime": "Neko2",
+        "prezime": "Nekic2",
+        "username": "a",
+        "password": "$2b$10$zWwBXjQ.IvEGXkez6TMm3./rQ1SPkO33oo9e8/zLXHwPOPbBexueq"
+    }
+]
