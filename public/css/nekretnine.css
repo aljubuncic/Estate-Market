@@ -21,6 +21,12 @@
 .kvadratura{
     text-align: left;
 }
+.lokacija{
+    text-align: left;
+}
+.godina_izgradnje{
+    text-align: left;
+}
 .cijena{
     text-align: right;
 }
