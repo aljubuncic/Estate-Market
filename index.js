@@ -148,6 +148,32 @@ app.get('/nekretnine', async function (req, res, next) {
     res.status(200).json(nekretnine);
 });
 
+app.get('/nekretnina/:id', async function(req, res, next){
+    let nekretninaId = req.params.id;
+    let nekretnina = await db.nekretnina.findByPk(nekretninaId, {
+        include: [
+          {
+            model: db.upit,
+            as: 'upiti',
+            attributes: ['tekst_upita'],
+            include: [
+              {
+                model: db.korisnik,
+                as: 'korisnik',
+                attributes: ['username']
+              },
+            ],
+          },
+        ],
+    });
+
+    if(!nekretnina){
+        res.status(400).json({greska: `Nekretnina sa id-em ${nekretninaId} ne postoji`});
+        return;
+    }
+    res.status(200).json(nekretnina);
+});
+
 app.post('/marketing/nekretnine',async function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     let nekretnineIds = req.body.nizNekretnina;
