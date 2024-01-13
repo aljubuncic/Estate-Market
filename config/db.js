@@ -16,7 +16,7 @@ db.upit = require(path.join(__dirname,'../models/upit.js'))(sequelize);
 
 //1 na n veze
 db.korisnik.hasMany(db.upit, {foreignKey: 'korisnik_id'});
-db.upit.belongsTo(db.korisnik, {foreignKey: 'korisnik_id'});
+db.upit.belongsTo(db.korisnik, {foreignKey: 'korisnik_id', as: 'korisnik'});
 
 db.nekretnina.hasMany(db.upit, {as: 'upiti'});
 db.upit.belongsTo(db.nekretnina);
