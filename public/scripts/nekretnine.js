@@ -9,7 +9,7 @@ document.body.addEventListener('click', function(event) {
         klikNekretnina(event);
     }
     if (event.target.classList.contains('dugme_otvori_detalje')) {
-        localStorage.setItem('id',event.target.id);
+        localStorage.setItem('nekretninaId',event.target.id);
         window.location.replace('http://localhost:3000/detalji.html');
     }
 });
@@ -133,6 +133,7 @@ function spojiNekretnine(divReferenca, instancaModula) {
 
 
 function filtrirajNekretnine(){
+    detaljiAlreadyClicked = null;
     min_cijena = document.getElementById('min_cijena').value;
     max_cijena = document.getElementById('max_cijena').value;
     min_kvadratura = document.getElementById('min_kvadratura').value;
@@ -150,26 +151,36 @@ function filtrirajNekretnine(){
     spojiNekretnine(divNekretnine, spisakFiltriranihNekretnina);
 }
 
-function klikNekretnina(event){
-    let nekretninaKartica = event.target.parentNode.parentNode;
-    let lokacijaElement = nekretninaKartica.querySelector('.lokacija');
-    let godinaIzgradnjeElement = nekretninaKartica.querySelector('.godina_izgradnje');
-    let dugmeOtvoriDetalje = nekretninaKartica.querySelector('.dugme_otvori_detalje');
+let detaljiAlreadyClicked = null;
 
-    let alreadyClicked = toggleDetaljiAndCheckDetaljiAlreadyClicked(nekretninaKartica,lokacijaElement,godinaIzgradnjeElement,dugmeOtvoriDetalje);
-    if(alreadyClicked)
-        return;
+function klikNekretnina(event){
+    // ako je već neka kartica nekretnine kliknuta
+    if(detaljiAlreadyClicked){
+        let nekretninaKartica = detaljiAlreadyClicked.parentNode.parentNode;
+        toggleDetalji(nekretninaKartica);
+        //ako je kliknuta ista nekretnina, ne povećavaj karticu na 500 px i ne povećavaj klikove u bazi
+        if(detaljiAlreadyClicked == event.target){
+            detaljiAlreadyClicked = null;
+            return;
+        }
+    }
+
+    detaljiAlreadyClicked = event.target;
+
+    let nekretninaKartica = event.target.parentNode.parentNode;
+    
+    toggleDetalji(nekretninaKartica);
 
     let idNekretnine = event.target.id;
     MarketingAjax.klikNekretnina(parseInt(idNekretnine));
 }
-
-function toggleDetaljiAndCheckDetaljiAlreadyClicked(nekretninaKartica, lokacijaElement, godinaIzgradnjeElement,dugmeOtvoriDetalje){
+//povećaj ili smanji karticu u ovisnosti dali je prethodni bilo kliknuto dugme detalji ili ne
+function toggleDetalji(nekretninaKartica){
+    let lokacijaElement = nekretninaKartica.querySelector('.lokacija');
+    let godinaIzgradnjeElement = nekretninaKartica.querySelector('.godina_izgradnje');
+    let dugmeOtvoriDetalje = nekretninaKartica.querySelector('.dugme_otvori_detalje');
     nekretninaKartica.classList.toggle('expanded');
-    let alreadyClicked = lokacijaElement.style.display === 'block';
     lokacijaElement.style.display = (lokacijaElement.style.display === 'block') ? 'none' : 'block';
     godinaIzgradnjeElement.style.display = (godinaIzgradnjeElement.style.display === 'block') ? 'none' : 'block';
     dugmeOtvoriDetalje.style.display = (dugmeOtvoriDetalje.style.display === 'inline') ? 'none' : 'inline';
-    return alreadyClicked;
 }
-
