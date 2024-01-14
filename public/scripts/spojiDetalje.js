@@ -1,4 +1,5 @@
 const nekretninaId = parseInt(localStorage.getItem('nekretninaId'));
+const upitiElement= document.getElementById('upiti');
 
 window.onload =  function(){
     popuniDetaljeNekretnine();
@@ -21,22 +22,24 @@ function popuniDetaljeNekretnine(){
 }
 
 function popuniUpite(upiti){
-    const upitiElement= document.getElementById('upiti');
     while(upitiElement.firstChild){
         upitiElement.removeChild(upitiElement.firstChild);
     }
     for(let upit of upiti){
-        let listElement = document.createElement('li');
-        
-        let usernameElement = document.createElement('b');
-        usernameElement.appendChild(document.createTextNode(upit.korisnik.username));
-
-        let tekstUpitaElement = document.createElement('p');
-        tekstUpitaElement.appendChild(document.createTextNode(upit.tekst_upita));
-
-        listElement.appendChild(usernameElement);
-        listElement.appendChild(tekstUpitaElement);
-        upitiElement.appendChild(listElement);
+        prikaziUpit(upit, upitiElement);
     }
+}
 
+function prikaziUpit(upit, upitiElement){
+    let listElement = document.createElement('li');
+        
+    let usernameElement = document.createElement('b');
+    usernameElement.appendChild(document.createTextNode(upit.korisnik.username));
+
+    let tekstUpitaElement = document.createElement('p');
+    tekstUpitaElement.appendChild(document.createTextNode(upit.tekst_upita));
+
+    listElement.appendChild(usernameElement);
+    listElement.appendChild(tekstUpitaElement);
+    upitiElement.appendChild(listElement);
 }

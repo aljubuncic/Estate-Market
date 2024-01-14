@@ -1,6 +1,9 @@
+let username = null;
+
 PoziviAjax.getKorisnik(function(error, data){
     if(error)
         return;
+    username = data.username;
     napraviDivZaUnosUpita();  
 });
 
@@ -31,6 +34,12 @@ function posaljiUpit(event, tekstUpita){
     PoziviAjax.postUpit(nekretninaId, tekstUpita, function (error, data){
         if(error)
         	return error;
-        popuniDetaljeNekretnine();
+        upit = {
+            tekst_upita: tekstUpita,
+            korisnik: {
+                username: username
+            }
+        };
+        prikaziUpit(upit, upitiElement);
     });
 }
