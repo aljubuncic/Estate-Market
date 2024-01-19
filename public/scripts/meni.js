@@ -10,8 +10,10 @@ window.onload = function(){
 document.getElementById('odjava').addEventListener('click',function(event){
     event.preventDefault();
     PoziviAjax.postLogout(function(error,data){
-        if(data)
-            displayAccordingMenuItems(false)
+        if(data){
+            displayAccordingMenuItems(false);
+            window.top.location.replace('http://localhost:3000/prijava.html');
+        }
     });
 }); 
 
