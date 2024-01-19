@@ -45,7 +45,6 @@ function spojiNekretnine(divReferenca, instancaModula) {
     for(let nekretnina of listaNekretnina){
         
         let nekretninaKartica = document.createElement('div');
-        nekretninaKartica.setAttribute('id',nekretnina.id);
         nekretninaKartica.classList.add('kartica');
 
         if(nekretnina.tip_nekretnine == 'Stan')
@@ -81,7 +80,7 @@ function spojiNekretnine(divReferenca, instancaModula) {
         nekretninaKartica.appendChild(kvadratura);
 
         let lokacija = document.createElement('p');
-        lokacija.appendChild(document.createTextNode(nekretnina.lokacija));
+        lokacija.appendChild(document.createTextNode(`Lokacija: ${nekretnina.lokacija}`));
         lokacija.classList.add('lokacija');
         nekretninaKartica.appendChild(lokacija);
         lokacija.style.display = 'none';
@@ -174,7 +173,7 @@ function klikNekretnina(event){
     let idNekretnine = event.target.id;
     MarketingAjax.klikNekretnina(parseInt(idNekretnine));
 }
-//povećaj ili smanji karticu u ovisnosti dali je prethodni bilo kliknuto dugme detalji ili ne
+//povećaj ili smanji karticu u ovisnosti da li je prethodno bilo kliknuto dugme detalji ili ne
 function toggleDetalji(nekretninaKartica){
     let lokacijaElement = nekretninaKartica.querySelector('.lokacija');
     let godinaIzgradnjeElement = nekretninaKartica.querySelector('.godina_izgradnje');
