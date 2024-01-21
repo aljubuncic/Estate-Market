@@ -10,7 +10,7 @@ document.body.addEventListener('click', function(event) {
     }
     if (event.target.classList.contains('dugme_otvori_detalje')) {
         localStorage.setItem('nekretninaId',event.target.id);
-        window.location.replace('http://localhost:3000/detalji.html');
+        window.location.href = 'http://localhost:3000/detalji.html';
     }
 });
 
